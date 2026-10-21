@@ -1,0 +1,26 @@
+.foto-animal {
+    height: 220px;
+    object-fit: cover;
+    width: 100%;
+}
+
+.foto-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #e9f5ec;
+    font-size: 4rem;
+}
+
+.foto-grande {
+    height: 320px;
+    font-size: 7rem;
+}
+
+.card {
+    transition: transform 0.15s ease;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+}
