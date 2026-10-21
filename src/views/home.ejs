@@ -1,0 +1,42 @@
+<%- include('partials/header') %>
+
+<h1 class="mb-3">Animais para adoção</h1>
+
+<div class="mb-4">
+    <a href="/" class="btn btn-sm <%= !especie ? 'btn-success' : 'btn-outline-success' %>">Todos</a>
+    <a href="/?especie=cachorro" class="btn btn-sm <%= especie === 'cachorro' ? 'btn-success' : 'btn-outline-success' %>">Cachorros</a>
+    <a href="/?especie=gato" class="btn btn-sm <%= especie === 'gato' ? 'btn-success' : 'btn-outline-success' %>">Gatos</a>
+    <a href="/?especie=outro" class="btn btn-sm <%= especie === 'outro' ? 'btn-success' : 'btn-outline-success' %>">Outros</a>
+</div>
+
+<% if (animais.length === 0) { %>
+    <div class="alert alert-info">Nenhum animal disponível no momento.</div>
+<% } else { %>
+    <div class="row g-4">
+        <% animais.forEach(animal => { %>
+            <div class="col-12 col-sm-6 col-lg-4">
+                <div class="card h-100 shadow-sm">
+                    <% if (animal.foto_url) { %>
+                        <img src="<%= animal.foto_url %>" class="card-img-top foto-animal" alt="Foto de <%= animal.nome %>">
+                    <% } else { %>
+                        <div class="foto-animal foto-placeholder">
+                            <%= animal.especie === 'cachorro' ? '🐶' : animal.especie === 'gato' ? '🐱' : '🐾' %>
+                        </div>
+                    <% } %>
+                    <div class="card-body">
+                        <h5 class="card-title"><%= animal.nome %></h5>
+                        <p class="card-text text-muted mb-2">
+                            <%= animal.raca %> · <%= animal.sexo === 'M' ? 'Macho' : 'Fêmea' %> · porte <%= animal.porte %>
+                        </p>
+                        <p class="card-text"><%= animal.descricao.length > 90 ? animal.descricao.slice(0, 90) + '...' : animal.descricao %></p>
+                    </div>
+                    <div class="card-footer bg-transparent border-0 pb-3">
+                        <a href="/animais/<%= animal.id %>" class="btn btn-success w-100">Ver detalhes</a>
+                    </div>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+<% } %>
+
+<%- include('partials/footer') %>

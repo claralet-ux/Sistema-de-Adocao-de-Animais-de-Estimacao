@@ -1,0 +1,39 @@
+<%- include('partials/header') %>
+
+<a href="/" class="btn btn-link ps-0">&larr; Voltar</a>
+
+<div class="row g-4">
+    <div class="col-md-5">
+        <% if (animal.foto_url) { %>
+            <img src="<%= animal.foto_url %>" class="img-fluid rounded" alt="Foto de <%= animal.nome %>">
+        <% } else { %>
+            <div class="foto-placeholder foto-grande rounded">
+                <%= animal.especie === 'cachorro' ? '🐶' : animal.especie === 'gato' ? '🐱' : '🐾' %>
+            </div>
+        <% } %>
+    </div>
+    <div class="col-md-7">
+        <h1><%= animal.nome %></h1>
+        <p>
+            <span class="badge bg-success"><%= animal.especie %></span>
+            <span class="badge bg-secondary"><%= animal.status %></span>
+        </p>
+        <ul class="list-group mb-3">
+            <li class="list-group-item"><strong>Raça:</strong> <%= animal.raca %></li>
+            <li class="list-group-item"><strong>Sexo:</strong> <%= animal.sexo === 'M' ? 'Macho' : 'Fêmea' %></li>
+            <li class="list-group-item"><strong>Porte:</strong> <%= animal.porte %></li>
+            <li class="list-group-item">
+                <strong>Idade:</strong>
+                <%= animal.idade_meses < 12
+                    ? animal.idade_meses + ' meses'
+                    : Math.floor(animal.idade_meses / 12) + ' ano(s)' %>
+            </li>
+            <% if (animal.responsavel) { %>
+                <li class="list-group-item"><strong>Cadastrado por:</strong> <%= animal.responsavel %></li>
+            <% } %>
+        </ul>
+        <p><%= animal.descricao %></p>
+    </div>
+</div>
+
+<%- include('partials/footer') %>
